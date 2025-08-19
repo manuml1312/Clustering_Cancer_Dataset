@@ -7,6 +7,7 @@ This repository contains an unsupervised clustering analysis of the METABRIC can
 - [Overview](#overview)
 - [Key Approaches](#key-approaches)
 - [Workflow](#workflow)
+- [Flowchart Diagram](#flowchart-diagram)
 - [Setup & Installation](#setup--installation)
 - [Usage](#usage)
 - [Dependencies](#dependencies)
@@ -29,75 +30,56 @@ This repository offers two complementary approaches to unsupervised clustering:
 
 2. **Advanced Pipeline Approach:**
    - Incorporates modern techniques for dimensionality reduction (e.g., PCA, t-SNE, or UMAP) combined with clustering.
-   - Explores the use of deep learning techniques where applicable to enhance clustering performance.
+   - Explores the use of advanced processing pipelines to improve clustering performance.
    - Aims to achieve improved cluster stability and interpretability by integrating multiple data processing stages.
-
-Both approaches are detailed in the notebook and provide valuable insights into the behavior of the METABRIC dataset from different analytical perspectives.
 
 ## Workflow
 
 1. **Data Loading & Preprocessing:**
-   - Import the METABRIC dataset.
-   - Perform data cleaning, normalization, and preliminary feature selection.
-  
+   - Load the METABRIC dataset.
+   - Clean and normalize data.
+   - Perform feature selection and scaling.
+
 2. **Clustering Analysis:**
    - **Traditional Approach:** 
-     - Apply standard clustering algorithms.
-     - Visualize clusters using plots and statistical summaries.
+     - Apply classical clustering algorithms.
+     - Visualize clusters using scatter plots and dendrograms.
    - **Advanced Pipeline Approach:**
-     - Apply dimensionality reduction techniques.
-     - Perform clustering subsequent to embedding the data in a lower-dimensional space.
-     - Compare clustering outcomes with the traditional methods.
-  
-3. **Evaluation & Visualization:**
-   - Compare results using silhouette scores, cluster stability metrics, and domain-specific insights.
-   - Visualize clusters with scatter plots, dendrograms, and heatmaps.
+     - Apply dimensionality reduction (e.g., PCA, t-SNE, or UMAP).
+     - Cluster data in the lower-dimensional space.
+     - Compare and analyze results with traditional methods.
 
-4. **Interpretation:**
-   - Derive insights regarding distinct cancer subtypes.
-   - Integrate clinical features to assess the clinical relevance of the identified clusters.
+3. **Evaluation & Interpretation:**
+   - Evaluate clusters using metrics like silhouette scores.
+   - Visualize clusters and interpret their significance.
+   - Report findings and derive biological insights.
 
 ## Flowchart Diagram
 
-Below is a flowchart diagram that summarizes the data flow and processing steps:
+Below is a flowchart diagram that outlines the data processing and clustering workflow as implemented in `METABRIC_Unsupervised_Manu_M_L.ipynb`:
 
 ```mermaid
 flowchart TD
-    A["User Uploads File (.docx or .mp4)"]
-    B["Determine File Type"]
-    C{"Is file a transcript? (.docx)"}
-    D["Process Transcript using docx2txt"]
-    E["Clean Text & Reframe into Indirect Speech"]
-    F["Is file a video? (.mp4)"]
-    G["Extract Audio using MoviePy & Pydub"]
-    H["Split Audio & Transcribe using Azure Speech SDK"]
-    I["Obtain Full Processed Text"]
-    J["Split Text into Document Chunks"]
-    K["Generate Document Metadata via OpenAI"]
-    L["Create FAISS Vector Index with OpenAI Embeddings"]
-    M["User Enters Query"]
-    N["Search Vector Index for Relevant Documents"]
-    O["Formulate System Prompt with Information & Chat History"]
-    P["Generate Answer using Azure OpenAI Completion"]
-    Q["Display Answer in Chat Interface"]
+    A[Load METABRIC Dataset]
+    B[Data Preprocessing]
+    C[Feature Selection & Normalization]
+    D[Traditional Clustering Approach]
+    E[Visualization of Clusters]
+    F[Advanced Pipeline Approach]
+    G[Apply Dimensionality Reduction]
+    H[Clustering in Reduced Space]
+    I[Evaluate Clustering Results]
+    J[Interpret & Report Findings]
 
     A --> B
     B --> C
-    C -- Yes --> D
-    C -- No --> F
+    C --> D
+    C --> G
     D --> E
-    F --> G
     G --> H
+    H --> E
     E --> I
-    H --> I
     I --> J
-    J --> K
-    K --> L
-    L --> M
-    M --> N
-    N --> O
-    O --> P
-    P --> Q
 ```
 
 ## Setup & Installation
@@ -111,7 +93,7 @@ flowchart TD
 2. **Create a Virtual Environment:**
    ```bash
    python -m venv venv
-   source venv/bin/activate  # For Windows: venv\Scripts\activate
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
 3. **Install Dependencies:**
@@ -122,27 +104,27 @@ flowchart TD
 ## Usage
 
 - Open the notebook `METABRIC_Unsupervised_Manu_M_L.ipynb` using Jupyter Notebook or JupyterLab.
-- Follow the instructions within the notebook to perform the unsupervised clustering analysis.
-- Adjust parameters in individual cells as needed to experiment with different clustering methods.
+- Follow the notebook cells to load the dataset, preprocess the data, run clustering analyses, and visualize the results.
+- Adjust parameters in the notebook cells as needed for further experimentation.
 
 ## Dependencies
 
-The project relies on several Python libraries including:
+The project requires the following Python libraries:
 - Python (>= 3.8)
-- NumPy, Pandas
-- Scikit-learn
-- Matplotlib, Seaborn
-- Jupyter Notebook
-- Additional libraries for advanced analysis (e.g., TensorFlow, PyTorch, or other deep learning frameworks if used)
+- NumPy and Pandas for data manipulation
+- Scikit-learn for clustering algorithms
+- Matplotlib and Seaborn for visualization
+- Jupyter Notebook or JupyterLab for running the analysis
+- Additional libraries based on the specific approaches used (e.g., PCA, t-SNE, or UMAP implementations)
 
-Please refer to the `requirements.txt` file for the complete list of dependencies.
+Refer to the `requirements.txt` file for a complete list of dependencies.
 
 ## Future Enhancements
 
-- **Method Comparison:** Provide a detailed performance comparison of the two clustering approaches.
-- **Integration with Clinical Data:** Explore how clustering results align with patient outcomes and clinical markers.
-- **Automated Reporting:** Generate automated reports and dashboards summarizing key findings.
-- **Scalability:** Optimize the pipelines for larger datasets and explore cloud-based solutions for computation.
+- **Method Comparison:** Detailed performance comparison between the traditional and advanced clustering approaches.
+- **Integration with Clinical Data:** Enhance clustering analysis by integrating clinical outcomes.
+- **Automated Reporting:** Generate comprehensive reports and dashboards summarizing key findings.
+- **Scalability:** Adapt the pipelines for large-scale datasets and incorporate cloud-based computing where applicable.
 
 ## License
 
@@ -150,4 +132,4 @@ This project is licensed under the MIT License.
 
 ## Acknowledgements
 
-We acknowledge the contributions of the research community in providing the METABRIC dataset and the developers of the various open-source libraries used in this project. Special thanks to all contributors and sponsors who supported this research.
+We thank the research community for providing the METABRIC dataset and acknowledge the developers of the open-source libraries that facilitated this analysis.
